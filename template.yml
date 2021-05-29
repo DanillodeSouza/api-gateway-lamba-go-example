@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 30
+    Environment:
+      Variables:
+        APP: api-gateway-lambda-go-example
+        LOG_LEVEL: info
+        AWS_REGION: us-east-1
+        SQS_AWS_REGION: us-east-1
+        SQS_ENDPOINT: http://localstack:4576/queue/test-queue
+
+Resources:
+  ApigatewaylambdagoexampleCallback:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda-api
+      Runtime: go1.x
+      Events:
+        Post:
+          Type: Api
+          Properties:
+            Path: /test
+            Method: GET
