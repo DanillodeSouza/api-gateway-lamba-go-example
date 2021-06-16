@@ -10,7 +10,7 @@ Globals:
         LOG_LEVEL: info
         AWS_REGION: us-east-1
         SQS_AWS_REGION: us-east-1
-        SQS_ENDPOINT: http://localstack:4576/queue/test-queue
+        SQS_ENDPOINT: http://localstack:4576/queue/example
 
 Resources:
   ApigatewaylambdagoexampleCallback:

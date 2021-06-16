@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script to create sqs queue
 
-SQS_QUEUE_NAME=test-queue # Sqs queue name
+SQS_QUEUE_NAME=example # Sqs queue name
 
 awslocal sqs create-queue \
     --queue-name $SQS_QUEUE_NAME \

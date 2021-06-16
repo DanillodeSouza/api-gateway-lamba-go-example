@@ -34,7 +34,7 @@ up: build
 	$(DOCKER_COMPOSE) up
 
 ## down: stop services
-down: build
+down:
 	@echo "$(OK_COLOR)==> Stopping services...$(NO_COLOR)"
 	$(DOCKER_COMPOSE) down
 

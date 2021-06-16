@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   api-gateway-lambda-go-example:
-    image: tutumi/aws-sam-local-api
+    image: danillo/aws-sam-local-api
     environment:
       - AWS_ACCESS_KEY_ID=anykey
       - AWS_SECRET_ACCESS_KEY=anysecretkey
@@ -13,7 +13,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     ports:
       - "3000:3000"
-    command: local start-api --host 0.0.0.0 --docker-volume-basedir "${PWD}/bin/linux_amd64" --docker-network teste_network --skip-pull-image
+    command: local start-api --host 0.0.0.0 --docker-volume-basedir "${PWD}/bin/linux_amd64" --docker-network dev --skip-pull-image
     depends_on:
       - localstack
     networks:
@@ -33,5 +33,5 @@ services:
 
 networks:
   dev:
-    name: teste_network
+    name: dev
 

@@ -31,7 +31,7 @@ func handle(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIG
 	}
 	service := apigatewaylambdagoexample.NewService(*sqs)
 
-	jsonString, jsonErr := json.Marshal(req.QueryStringParameters)
+	queryStringBytes, jsonErr := json.Marshal(req.QueryStringParameters)
 	if jsonErr != nil {
 		apigatewaylambdagoexample.LogError(ctx, logger, fmt.Sprintf("could not marshal querystring from GET: %s, body: %s", jsonErr, req.QueryStringParameters), uri)
 		return events.APIGatewayProxyResponse{
@@ -39,7 +39,7 @@ func handle(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIG
 		}, nil
 	}
 
-	createErr := service.CreateMessage(ctx, config.SQSEndpoint, jsonString)
+	createErr := service.CreateMessage(ctx, config.SQSEndpoint, queryStringBytes)
 
 	if createErr != nil {
 		apigatewaylambdagoexample.LogError(ctx, logger, fmt.Sprintf("could not create a sqs message: %s", createErr), uri)
@@ -50,6 +50,7 @@ func handle(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIG
 
 	return events.APIGatewayProxyResponse{
 		StatusCode: http.StatusOK,
+		Body:       fmt.Sprintf("%v", req.QueryStringParameters),
 	}, nil
 }
 
